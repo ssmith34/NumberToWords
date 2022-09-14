@@ -9,11 +9,12 @@ public class NumberToWords {
         // Variable Declaration
         int currentDigit = 0;
         String outPut = "";
+        int properNumber = reverse(number);
 
         // Extract the last digit of number
-        while (number > 0) {
-            currentDigit = number % 10;
-            number = number / 10;
+        while (properNumber > 0) {
+            currentDigit = properNumber % 10;
+            properNumber = properNumber / 10;
 
             switch (currentDigit) {
                 case 0:
@@ -44,7 +45,20 @@ public class NumberToWords {
                     System.out.print("Eight ");
                 case 9:
                     System.out.print("Nine ");
+                default:
+                    System.out.println("Should not get to here");
             }
         }
+    }
+
+    public static int reverse (int number) {
+        int reverseNumber = 0;
+        while (number > 0) {
+            int digit = number % 10;
+            number = number / 10;
+            reverseNumber = reverseNumber * 10;
+            reverseNumber += digit;
+        }
+        return reverseNumber;
     }
 }
