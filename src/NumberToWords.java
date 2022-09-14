@@ -10,9 +10,10 @@ public class NumberToWords {
         int currentDigit = 0;
         String outPut = "";
         int properNumber = reverse(number);
+        int count = getDigitCount(number);
 
         // Extract the last digit of number
-        while (properNumber > 0) {
+        while (count > 0) {
             currentDigit = properNumber % 10;
             properNumber = properNumber / 10;
 
@@ -43,22 +44,40 @@ public class NumberToWords {
                     break;
                 case 8:
                     System.out.print("Eight ");
+                    break;
                 case 9:
                     System.out.print("Nine ");
+                    break;
                 default:
-                    System.out.println("Should not get to here");
+                    break;
             }
+            count--;
         }
     }
 
     public static int reverse (int number) {
         int reverseNumber = 0;
-        while (number > 0) {
-            int digit = number % 10;
-            number = number / 10;
-            reverseNumber = reverseNumber * 10;
-            reverseNumber += digit;
+        while (number != 0) {
+            reverseNumber = (reverseNumber * 10) + (number % 10);
+            number /= 10;
         }
         return reverseNumber;
+    }
+
+    public static int getDigitCount (int number) {
+        //Edge case
+        if (number < 0) {
+            return -1;
+        }
+
+        // Variable Declaration
+        int count = 1;
+
+        // iterate through number to get count of digits
+        while (number > 9) {
+            number /= 10;
+            count++;
+        }
+        return count;
     }
 }
